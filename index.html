@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4" ng-app="empApp" ng-controller="empController">
+					<br><br>
+					<form name="empform" novalidate>
+					  <div class="form-group" ng-class="{ 'has-error':empform.firstName.$invalid && !empform.firstName.$pristine,
+						'has-success':empform.firstName.$valid }">
+						<label for="">First Name*</label>
+						<input type="text" class="form-control" name="firstName" ng-model="firstName" placeholder="Enter first name" required>
+						<span class="help-block" ng-show="empform.firstName.$invalid && !empform.firstName.$pristine">First name is required</span>
+					  </div>
+					  <div class="form-group"  ng-class="{'has-error':empform.lastName.$invalid && !empform.lastName.$pristine,
+						'has-success':empform.lastName.$valid }">
+						<label for="">Last Name*</label>
+						<input type="text" class="form-control" name="lastName" ng-model="lastName" placeholder="Enter last name" required>
+						<span class="help-block" ng-show="empform.lastName.$invalid && !empform.lastName.$pristine">Last name is required</span>
+					  </div>
+					  <div class="form-group" ng-class="{'has-error':empform.emailAddress.$invalid && !empform.emailAddress.$pristine,
+						'has-success':empform.emailAddress.$valid }">
+						<label for="">Email address*</label>
+						<input type="email" class="form-control" name="emailAddress" ng-model="emailAddress" placeholder="Enter Email" required>
+						<span class="help-block" ng-show ="empform.emailAddress.$error.required && empform.emailAddress.$invalid && !empform.emailAddress.$pristine">Email is required.</span>
+						<span class="help-block" ng-show ="empform.emailAddress.$invalid && !empform.emailAddress.$pristine">Invalid email Address.</span>
+					  </div>
+					  <button ng-click="reset()" class="btn btn-info">Reset</button>
+					  <button type="submit" ng-click="submit()" class="btn btn-success" ng-disabled="empform.firstName.$dirty
+					  && empform.firstName.$invalid || empform.lastName.$dirty
+					  && empform.lastName.$invalid || empform.emailAddress.$dirty
+					  && empform.emailAddress.$invalid">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var empApp = angular.module("empApp",[]);
+			
+			empApp.controller('empController',function($scope){
+				$scope.reset = function() {
+					$scope.firstName = "";
+					$scope.lastName = "";
+					$scope.emailAddress = "";
+				}
+				$scope.reset();
+			});
+		</script>
+
+	</body>
+</html>
+	
